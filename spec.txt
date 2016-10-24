@@ -1,0 +1,8 @@
+Vanilla solitaire
+
+This is a vanilla solitaire game. Move cards up to the ace stacks in ascending
+order and same suit, ace first. Move cards from one row to another so that
+cards are in alternating color and descending order one by one. You can move
+kings to empty rows. If a card is free you can turn it upside. If you can't
+move you can draw cards from the deck. If you empty the deck three times
+you've lost. You win by
