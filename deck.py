@@ -1,6 +1,7 @@
 """The models for representing dekcs and cards."""
 
-from random import shuffle, choice
+import random
+
 
 from card_funcs import get_color, get_value
 
@@ -25,7 +26,7 @@ class Card():
 class Deck():
     """This is a deck."""
 
-    def __init__(self, ranks=None):
+    def __init__(self, ranks=None, shuffle=True):
         """Make the deck."""
 
         if not ranks:
@@ -36,6 +37,8 @@ class Deck():
         self.suits = "hearts diamonds spades clubs".split()
         self.cards = [Card(rank, suit) for suit in self.suits
                                        for rank in self.ranks]
+        if shuffle:
+            random.shuffle(self.cards)
 
     def __len__(self):
         """The length representation of the deck."""
@@ -57,12 +60,4 @@ class PiquetDeck(Deck):
 
 
 if __name__ == "__main__":
-    deck = Deck(['A'] + [str(x) for x in range(2, 11)] + list("JQK")).cards
-    piquetdeck = PiquetDeck().cards
-    downed_card = choice(deck)
-    downed_card.orientation = 'down'
-    up_card = choice(deck)
-    up_card.rank = '10'
-    up_card.suit = 'diamonds'
-    print(up_card)
-    print(downed_card)
+    pass

@@ -68,7 +68,7 @@ class Table():
             print('|' + 'The Stack'.center(13) + '|')
 
 class Game():
-    """Representing the game."""
+    """Representing the choice."""
 
     def __init__(self):
         """This does nothing. Comment anyway"""
@@ -80,24 +80,31 @@ class Game():
         and [destination_card].
         """
 
+        # Decide between drawing and moving
         self.choice = ''
-        while not self.choice in self.get_moveable_cards():
+        while not self.choice in self.get_moveable_cards() + ['draw']:
             self.choice = input("Draw or select card to move: ").lower().strip() ## REFACTOR
-            if self.choice not 'draw':
+            if self.choice != 'draw':
                 temp_card = self.choice.split()
-                self.move_from = Card(temp_card[0], temp_card[1])
+                try:
+                    self.move_from = Card(temp_card[0], temp_card[1])
+                except IndexError as e:
+                    print(e)
+                    continue
 
-                self.move_to = ''
-                while self.move_to not in self.get_movable_cards(): ## REFACTOR
-                    self.move_to = input("Enter destination: ")
-                    self.temp_card = self.move_to.split()
-                    try:
-                        self.move_to = Card(temp_card[0], temp_card[1])
-                    except IndexError:
-                        print("Index error.")
-                        continue
+        if self.choice != 'draw':
+            self.move_to = ''
+            while self.move_to not in self.get_movable_cards(): ## REFACTOR
+                self.move_to = input("Enter destination: ")
+                self.temp_card = self.move_to.split()
+                try:
+                    self.move_to = Card(temp_card[0], temp_card[1])
+                except IndexError as e:
+                    print(e)
+                    continue
 
-
+    def move(from_card, to_card):
+        """Move."""
 
     def get_moveable_cards(self, table):
         """Generate all movable cards (all open cards in the columns and
